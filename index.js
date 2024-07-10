@@ -1,3 +1,4 @@
+feat-create-db-#20
 /* Para que o projeto funcione corretamente, não esquecer de instalar todas as dependências necessárias.
 É necessário os NODE_MODULES que foram ignoradas no .GITIGNORE. */
 
@@ -10,3 +11,18 @@ const port = 3000;
 app.listen(port, () => console.log(`Servidor rodando na porta ${port}.`));
 
 db(); // EXECUTANDO O CÓDIGO DO BANCO DE DADOS
+
+const express = require('express');
+
+const app = express();
+
+const port = 2001
+
+
+app.get('/', (req, res) => {
+    res.send("Hello World")
+})
+
+
+app.listen(port)
+main
