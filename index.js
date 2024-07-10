@@ -1,4 +1,3 @@
-feat-create-db-#20
 /* Para que o projeto funcione corretamente, não esquecer de instalar todas as dependências necessárias.
 É necessário os NODE_MODULES que foram ignoradas no .GITIGNORE. */
 
