@@ -12,17 +12,9 @@ app.listen(port, () => console.log(`Servidor rodando na porta ${port}.`));
 
 db(); // EXECUTANDO O CÓDIGO DO BANCO DE DADOS
 
-const express = require('express');
-
-const app = express();
-
-const port = 2001
-
-
 app.get('/', (req, res) => {
     res.send("Hello World")
 })
-
 
 app.listen(port)
 main
