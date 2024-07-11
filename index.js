@@ -14,5 +14,3 @@ db(); // EXECUTANDO O CÓDIGO DO BANCO DE DADOS
 app.get('/', (req, res) => {
     res.send("Hello World")
 })
-
-app.listen(port)
