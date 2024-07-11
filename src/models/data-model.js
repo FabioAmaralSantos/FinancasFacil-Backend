@@ -2,7 +2,7 @@
 
 const mongoose = require("mongoose");
 
-const transacaoSchema = new mongoose.Schema({
+const dataSchema = new mongoose.Schema({
   descricao: {
     type: String,
     required: true,
@@ -25,6 +25,6 @@ const transacaoSchema = new mongoose.Schema({
   },
 });
 
-const transacaoModel = mongoose.model("transacao", transacaoSchema);
+const data = mongoose.model("data", dataSchema);
 
-module.exports = transacaoModel;
+module.exports = data;
