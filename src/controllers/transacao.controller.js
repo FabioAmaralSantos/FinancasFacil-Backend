@@ -1,4 +1,5 @@
 const transacaoService = require("../services/transacao.service");
+const mongoose = require("mongoose");
 
 const create = async (req, res) => {
   const { descricao, data, tipo, valor, status } = req.body;
@@ -28,4 +29,30 @@ const create = async (req, res) => {
   });
 };
 
-module.exports = { create };
+const findAll = async (req, res) => {
+  const transacoes = await transacaoService.findAll();
+
+  if (transacoes === 0) {
+    return res.status(400).send({ message: "Nada para Mostrar" });
+  }
+
+  res.send(transacoes);
+};
+
+const findById = async (req, res) => {
+  const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) { // Método do Mongoose para verificar se um ID é válido
+    return res.status(400).send({ message: "ID Inválido." });
+  }
+
+  const transacao = await transacaoService.findById(id);
+
+  if (!transacao) {
+    return res.status(400).send({ message: "Transação não encontrada." });
+  }
+
+  res.send(transacao);
+};
+
+module.exports = { create, findAll, findById };
