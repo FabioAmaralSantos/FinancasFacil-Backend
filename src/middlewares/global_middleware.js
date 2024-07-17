@@ -15,7 +15,7 @@ const validId = (req, res, next) => {
 const validTransacao = async (req, res, next) => {
   const id = req.params.id;
 
-  const transacao = await transacaoService.findById(id);
+  const transacao = await transacaoService.findTransacaoById(id);
 
   if (!transacao) {
     return res.status(400).send({ message: "Transação não encontrada." });
