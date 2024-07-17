@@ -1,8 +1,6 @@
 const transacaoService = require("../services/transacao.service");
-const mongoose = require("mongoose");
-const global_middleware = require("../middlewares/global_middleware");
 
-const create = async (req, res) => {
+const createTransacao = async (req, res) => {
   const { descricao, data, tipo, valor, status } = req.body;
 
   if (!descricao || !data || !tipo || !valor || !status) {
@@ -11,7 +9,7 @@ const create = async (req, res) => {
       .send({ message: "Preencha todos os campos para registrar." });
   }
 
-  const transacao = await transacaoService.create(req.body);
+  const transacao = await transacaoService.createTransacao(req.body);
 
   if (!transacao) {
     return res.status(400).send({ message: "Erro na criação da transação!" });
@@ -30,8 +28,8 @@ const create = async (req, res) => {
   });
 };
 
-const findAll = async (req, res) => {
-  const transacoes = await transacaoService.findAll();
+const findAllTransacoes = async (req, res) => {
+  const transacoes = await transacaoService.findAllTransacoes();
 
   if (transacoes === 0) {
     return res.status(400).send({ message: "Nada para Mostrar" });
@@ -40,12 +38,12 @@ const findAll = async (req, res) => {
   res.send(transacoes);
 };
 
-const findById = async (req, res) => {
+const findTransacaoById = async (req, res) => {
   const transacao = req.transacao;
   res.send(transacao);
 };
 
-const update = async (req, res) => {
+const updateTransacao = async (req, res) => {
   const { descricao, data, tipo, valor, status } = req.body;
 
   if (!descricao && !data && !tipo && !valor && !status) {
@@ -56,9 +54,30 @@ const update = async (req, res) => {
 
   const { id, transacao } = req;
 
-  await transacaoService.update(id, descricao, data, tipo, valor, status);
+  await transacaoService.updateTransacao(
+    id,
+    descricao,
+    data,
+    tipo,
+    valor,
+    status
+  );
 
   res.send({ message: "Transação foi atualizada com sucesso!" });
 };
 
-module.exports = { create, findAll, findById, update };
+const deleteTransacao = async (req, res) => {
+  const id = req.id;
+
+  await transacaoService.deleteTransacao(id);
+
+  res.send({ message: "Transação deletada com sucesso!" });
+};
+
+module.exports = {
+  createTransacao,
+  findAllTransacoes,
+  findTransacaoById,
+  updateTransacao,
+  deleteTransacao,
+};
